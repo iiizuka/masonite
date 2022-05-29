@@ -6,4 +6,4 @@ format:
 	black .
 	make lint
 serve:
-	python craft serve
+	python craft serve -b 0.0.0.0
