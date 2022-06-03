@@ -1,7 +1,7 @@
 from masonite.controllers import Controller
 from masonite.views import View
 from masonite.request import Request
-from masonite.User import User
+from app.models.User import User
 
 
 class UserController(Controller):
@@ -15,9 +15,9 @@ class UserController(Controller):
         return view.render("")
 
     def show(self, view: View, request: Request):
-        User.find(request.param('user_id'))
-
-        return view.render("")
+        return view.render("welcome", {
+            "user": User.find(request.param("id"))
+        })
 
     def edit(self, view: View):
         return view.render("")
