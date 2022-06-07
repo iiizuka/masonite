@@ -10,12 +10,19 @@
 </head>
 
 <body>
-  <form method="POST" action="{{ route('user.create') }}">
-    {{ crsf_token }}
+  <form method="POST" action="{{ route('user.store') }}">
+    {{ csrf_field }}
 
-    <input type="text" name="name" />
+    <label for="name">名前</label>
+    <input type="text" id="name" name="name" />
 
-    <buttom type="submit">登録</buttom>
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" name="email" />
+
+    <label for="password">パスワード</label>
+    <input type="password" id="password" name="password" />
+
+    <button type="submit">登録</button>
   </form>
 </body>
 

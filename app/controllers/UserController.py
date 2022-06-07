@@ -2,6 +2,7 @@ from masonite.controllers import Controller
 from masonite.views import View
 from masonite.request import Request
 from app.models.User import User
+from masonite.essentials.helpers import hashid
 
 
 class UserController(Controller):
@@ -20,6 +21,7 @@ class UserController(Controller):
         User.create(
             name=request.input('name'),
             email=request.input('email'),
+            password=hashid(request.input('password')),
         )
 
         return view.render("user.index", {
