@@ -32,11 +32,12 @@ class UserController(Controller):
         """ユーザ詳細."""
         return view.render("user.show", {
             "user": User.find(request.param("id"))
+            # "user": request.user()
         })
 
     def edit(self, view: View, request: Request):
         """ユーザ編集画面."""
-        return view.render("user.edit", {
+        return view.render("user.create", {
             "user": User.find_or_404(request.param("id"))
         })
 
