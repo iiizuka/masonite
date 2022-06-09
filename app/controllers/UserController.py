@@ -1,8 +1,10 @@
 from masonite.controllers import Controller
 from masonite.views import View
 from masonite.request import Request
-from app.models.User import User
+from masonite.response import Response
 from masonite.essentials.helpers import hashid
+from app.models.User import User
+from app.validation.UserValidation import UserValidation
 
 
 class UserController(Controller):
@@ -16,8 +18,14 @@ class UserController(Controller):
         """ユーザ登録画面."""
         return view.render("user.create")
 
-    def store(self, view: View, request: Request):
+    def store(self, view: View, request: Request, response: Response):
         """ユーザ登録."""
+        errors = request.validate(UserValidation)
+
+        if errors:
+            request.session.flash('errors', errors)
+            return response.back()
+
         User.create(
             name=request.input('name'),
             email=request.input('email'),
