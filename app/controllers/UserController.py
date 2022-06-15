@@ -23,8 +23,8 @@ class UserController(Controller):
         errors = request.validate(UserValidation)
 
         if errors:
-            request.session.flash('errors', errors)
-            return response.back()
+            print(response.back())
+            return response.back().with_errors(errors)
 
         User.create(
             name=request.input('name'),
