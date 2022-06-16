@@ -18,13 +18,13 @@ class UserController(Controller):
         """ユーザ登録画面."""
         return view.render("user.create")
 
-    def store(self, view: View, request: Request, response: Response):
+    def store(self, request: Request, response: Response):
         """ユーザ登録."""
         errors = request.validate(UserValidation)
 
         if errors:
-            print(response.back())
-            return response.back().with_errors(errors)
+            return response.redirect('', 'user.create') \
+                .with_errors(errors).with_input()
 
         User.create(
             name=request.input('name'),
@@ -32,9 +32,7 @@ class UserController(Controller):
             password=hashid(request.input('password')),
         )
 
-        return view.render("user.index", {
-            "users" : User.all()
-        })
+        return response.redirect('', 'user.index')
 
     def show(self, view: View, request: Request):
         """ユーザ詳細."""
