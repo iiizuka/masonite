@@ -1,18 +1,38 @@
 @extends 'base.html'
 
 @block content
+@if session().has('errors'):
+<div class="bg-yellow-400">
+  <div class="bg-yellow-200 text-yellow-800 px-4 py-2">
+    <ul>
+      @for key, error_list in session().get('errors').items():
+        @for error in error_list
+          <li>{{ error }}</li>
+        @endfor
+      @endfor
+    </ul>
+  </div>
+</div>
+@endif
+
 <main>
   <form method="POST" action="{{ route('user.store') }}">
     {{ csrf_field }}
 
-    <label for="name">名前</label>
-    <input type="text" id="name" name="name" />
+    <div>
+      <label for="name">名前</label>
+      <input type="text" id="name" name="name" />
+    </div>
 
-    <label for="email">メールアドレス</label>
-    <input type="email" id="email" name="email" />
+    <div>
+      <label for="email">メールアドレス</label>
+      <input type="email" id="email" name="email" />
+    </div>
 
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password" />
+    <div>
+      <label for="password">パスワード</label>
+      <input type="password" id="password" name="password" />
+    </div>
 
     <button type="submit">登録</button>
   </form>
