@@ -21,7 +21,27 @@
 
     <div>
       <label for="name">名前</label>
-      <input type="text" id="name" name="name" />
+      @if session().has('name'):
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="{{ session().get('name') }}"
+        />
+      @elif user:
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="{{ user.name }}"
+        />
+      @else
+        <input
+          type="text"
+          id="name"
+          name="name"
+        />
+      @endif
     </div>
 
     <div>
