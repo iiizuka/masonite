@@ -3,6 +3,8 @@
 from masonite.validation import (
     RuleEnclosure,
     required,
+    strong,
+    confirmed,
 )
 
 
@@ -21,5 +23,7 @@ class UserValidation(RuleEnclosure):
                 'name',
                 'email',
                 'password',
-            ])
+            ]),
+            strong('password'),
+            confirmed('password'),
         ]

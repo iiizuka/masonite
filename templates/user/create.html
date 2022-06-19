@@ -21,9 +21,9 @@
 
     <div>
       <label for="name">名前</label>
-      @if session().has('name'):
+      @if session().has('name')
         <input type="text" name="name" value="{{ session().get('name') }}" />
-      @elif user:
+      @elif user
         <input type="text" name="name" value="{{ user.name }}" />
       @else
         <input type="text" name="name" />
@@ -32,9 +32,9 @@
 
     <div>
       <label for="email">メールアドレス</label>
-      @if session().has('email'):
+      @if session().has('email')
         <input type="email" name="email" value="{{ session().get('email') }}" />
-      @elif user:
+      @elif user
         <input type="email" name="email" value="{{ user.email }}" />
       @else
         <input type="email" name="email" />
@@ -47,8 +47,8 @@
     </div>
 
     <div>
-      <label for="password">パスワード（確認）</label>
-      <input type="password" name="password_confirm" />
+      <label for="password_confirmation">パスワード（確認）</label>
+      <input type="password" name="password_confirmation" />
     </div>
 
     <button type="submit">登録</button>
