@@ -16,7 +16,12 @@
 @endif
 
 <main>
-  <form method="POST" action="{{ route('user.store') }}">
+  @if user
+    <form method="POST" action="{{ route('user.update', [user.id]) }}">
+      {{ method('PUT') }}
+  @else
+    <form method="POST" action="{{ route('user.store') }}">
+  @endif
     {{ csrf_field }}
 
     <div>
