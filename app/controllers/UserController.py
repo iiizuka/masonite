@@ -47,7 +47,15 @@ class UserController(Controller):
 
     def update(self, view: View, request: Request, response: Response):
         """ユーザ編集."""
-        user = User.find_or_404(request.param("id"))
+        user_id = request.param("id")
+
+        errors = request.validate(UserValidation)
+
+        if errors:
+            return response.redirect('', 'user.edit', [user_id]) \
+                .with_errors(errors).with_input()
+
+        user = User.find_or_404(user_id)
 
         user.fill(request.all()).save()
 
